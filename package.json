@@ -1,0 +1,39 @@
+{
+  "name": "my-react-app",
+  "version": "0.0.1",
+  "description": "Based on react and built on a flux architecture.",
+  "repository": "https://github.com/laila-ronning/my-react-app",
+  "main": "js/app.js",
+  "dependencies": {
+    "es5-shim": "~4.0.5",
+    "flux": "^2.0.1",
+    "keymirror": "~0.1.0",
+    "object-assign": "^1.0.0",
+    "react": "^0.13.2",
+    "react-bootstrap-dropdown": "^0.2.1",
+    "react-widgets": "2.6.0"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "jest-cli": "~0.1.17",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest"
+  },
+  "author": "Laila Rønnings",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": "./js"
+  }
+}
