@@ -15,7 +15,6 @@ var Events = require('../utils/Events');
 function getDeployState() {
   return {
     allDeploys: DeployStore.getAll(),
-    areAllComplete: DeployStore.areAllComplete()
   };
 }
 
@@ -23,14 +22,6 @@ var DeployApp = React.createClass({
 
   getInitialState: function() {
     return getDeployState();
-  },
-
-  componentDidMount: function() {
-    DeployStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    DeployStore.removeChangeListener(this._onChange);
   },
 
   /**
@@ -46,7 +37,7 @@ var DeployApp = React.createClass({
             <InputSection />
             <ListSection
                 allDeploys={this.state.allDeploys}
-                areAllComplete={this.state.areAllComplete} />
+            />
           </body>
      </div>
   	);
