@@ -3,9 +3,11 @@
  * the DeployStore and passes the new data to its children.
  */
 
-var Header = require('./Header.react');
 var React = require('react');
+var InputSection = require('./InputSection.react');
+var ListSection = require('./ListSection.react');
 var DeployStore = require('../stores/DeployStore');
+var Events = require('../utils/Events');
 
 /**
  * Retrieve the current Deploy data from the DeployStore
@@ -37,7 +39,15 @@ var DeployApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <Header />
+        <header id="header">
+          <h1>Nodemanager deploy</h1>
+          </header>
+          <body>
+            <InputSection />
+            <ListSection
+                allDeploys={this.state.allDeploys}
+                areAllComplete={this.state.areAllComplete} />
+          </body>
      </div>
   	);
   },

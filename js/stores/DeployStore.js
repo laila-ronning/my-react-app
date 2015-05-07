@@ -10,13 +10,13 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var DEPLOYS = [
-  {id: 'Sporting Goods 1', version: '$49.99', complete: true, name: 'Football'},
-  {id: 'Sporting Goods 2', version: '$9.99', complete: true, name: 'Baseball'},
-  {id: 'Sporting Goods 3', version: '$29.99', complete: false, name: 'Basketball'},
-  {id: 'Electronics 1', version: '$99.99', complete: true, name: 'iPod Touch'},
-  {id: 'Electronics 2', version: '$399.99', complete: false, name: 'iPhone 5'},
-  {id: 'Electronics 3', version: '$199.99', complete: true, name: 'Nexus 7'}
-];
+  {id: 'registry', version: '3.2.1', complete: true, name: 'Oppslagstjenesten'},
+  {id: 'mag-driftdashboard', version: '3.2.2', complete: true, name: 'Drift-console'},
+  {id: 'node-manager-server', version: '0.2.0', complete: false, name: 'Deploy-server'},
+  {id: 'node-manager-web', version: '0.0.1', complete: true, name: 'Deploy-console'},
+  {id: 'skatteinfo-web', version: '4.3.2', complete: false, name: 'Skattefinn'},
+  {id: 'boks', version: '3.4.2', complete: true, name: 'boks-cluster'},
+  {id: 'iris', version: '3.4.2', complete: true, name: 'iris-cluster'}];
 
 var _deploys = DEPLOYS;
 
