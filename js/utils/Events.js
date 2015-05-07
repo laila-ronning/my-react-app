@@ -50,8 +50,10 @@ function createTrigger(event, data) {
 }
 
 module.exports = {
-    NEW_DEPLOYS: 'NEW_DEPLOYS',
+    ADD_DEPLOY: 'ADD_DEPLOY',
+    REMOVE_DEPLOY: 'REMOVE_DEPLOY',
     RERENDER: 'RERENDER',
+
 
     on: on,
     off: off,

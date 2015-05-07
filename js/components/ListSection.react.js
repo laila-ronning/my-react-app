@@ -1,7 +1,6 @@
 
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var DeployActions = require('../actions/DeployActions');
 var DeployItem = require('./DeployItem.react');
 var Events = require('../utils/Events');
 

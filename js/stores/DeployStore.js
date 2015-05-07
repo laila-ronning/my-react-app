@@ -21,10 +21,16 @@ var DEPLOYS = [
 
 var _deploys = DEPLOYS;
 
-Events.on(Events.NEW_DEPLOY, function(deployItem) {
-//    localStorage.setItem('deployItem=', deployItem);
-    console.log('Deploystore, got deployItem ', deployItem[0] + " " + deployItem[1]);
+Events.on(Events.ADD_DEPLOY, function(deployItem) {
+    console.log('Deploystore, add deployItem with name ', deployItem[0] + " and version " + deployItem[1]);
     create(deployItem[0], deployItem[1]);
+
+    Events.trigger(Events.RERENDER, _deploys);
+});
+
+Events.on(Events.REMOVE_DEPLOY, function(deployId) {
+    console.log('Deploystore, remove deployItem with id ', deployId);
+    destroy(deployId);
 
     Events.trigger(Events.RERENDER, _deploys);
 });

@@ -1,7 +1,6 @@
 
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var DeployActions = require('../actions/DeployActions');
 var Events = require('../utils/Events');
 
 var cx = require('react/lib/cx');
@@ -47,27 +46,8 @@ var DeployItem = React.createClass({
     );
   },
 
-  _onToggleComplete: function() {
-    DeployActions.toggleComplete(this.props.deploy);
-  },
-
-  _onDoubleClick: function() {
-    this.setState({isEditing: true});
-  },
-
-  /**
-   * Event handler called within DeployTextInput.
-   * Defining this here allows DeployTextInput to be used in multiple places
-   * in different ways.
-   * @param  {string} text
-   */
-  _onSave: function(text) {
-    DeployActions.updateText(this.props.deploy.id, text);
-    this.setState({isEditing: false});
-  },
-
   _onDestroyClick: function() {
-    DeployActions.destroy(this.props.deploy.id);
+    Events.trigger(Events.REMOVE_DEPLOY, this.props.deploy.id);
   }
 
 });
