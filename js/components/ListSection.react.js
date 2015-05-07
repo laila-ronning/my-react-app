@@ -12,6 +12,15 @@ var ListSection = React.createClass({
     areAllComplete: ReactPropTypes.bool.isRequired
   },
 
+    componentDidMount: function() {
+        Events.on(Events.RERENDER, function(_deploys) {
+            console.log("Rerendering list , deploys=" + _deploys);
+            this.forceUpdate();
+        }, this);
+
+    },
+
+
   /**
    * @return {object}
    */

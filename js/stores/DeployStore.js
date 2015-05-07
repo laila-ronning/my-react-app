@@ -6,6 +6,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var DeployConstants = require('../constants/DeployConstants');
 var assign = require('object-assign');
+var Events = require('../utils/Events');
 
 var CHANGE_EVENT = 'change';
 
@@ -19,6 +20,14 @@ var DEPLOYS = [
   {id: 'iris', version: '3.4.2', complete: true, name: 'iris-cluster'}];
 
 var _deploys = DEPLOYS;
+
+Events.on(Events.NEW_DEPLOY, function(deployItem) {
+//    localStorage.setItem('deployItem=', deployItem);
+    console.log('Deploystore, got deployItem ', deployItem[0] + " " + deployItem[1]);
+    create(deployItem[0], deployItem[1]);
+
+    Events.trigger(Events.RERENDER, _deploys);
+});
 
 /**
  * Create a Deploy item.

@@ -49,8 +49,8 @@ var InputSection = React.createClass({
   _onSave: function() {
     console.log("Name of component to deploy:" + this.state.name);
     console.log("Version of component to deploy:" + this.state.version);
-    DeployActions.create(this.props.name, this.props.version);
-
+//    DeployActions.create(this.props.name, this.props.version);
+    Events.trigger(Events.NEW_DEPLOY, [this.state.name, this.state.version]);
   }
 
 });
