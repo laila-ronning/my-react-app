@@ -14,7 +14,7 @@ var Events = require('../utils/Events');
  */
 function getDeployState() {
   return {
-    allDeploys: DeployStore.getAll(),
+    allDeploys: DeployStore.getAll()
   };
 }
 
