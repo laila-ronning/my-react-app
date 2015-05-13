@@ -4,7 +4,7 @@
 
 var DeployConstants = require('../constants/DeployConstants');
 var Events = require('../utils/Events');
-var Deploy = require('../deploy.js');
+var deploy = require('../deploy.js');
 
 var DEPLOYS = [
   {id: 'registry', version: '3.2.1', complete: true, name: 'Oppslagstjenesten'},
@@ -25,15 +25,15 @@ Events.on(Events.ADD_DEPLOY, function(deployItem) {
 });
 
 Events.on(Events.REMOVE_DEPLOY, function(deployId) {
-    console.log('Deploystore, remove deployItem with id ', deployId);
+    console.log('Deploystore on.REMOVE_DEPLOY, remove deployItem with id ', deployId);
     destroy(deployId);
 
     Events.trigger(Events.RERENDER, _deploys);
 });
 
 Events.on(Events.DEPLOY_CREATE, function(deployId) {
-    console.log('Deploystore, deploy deployItem with id ', deployId);
-    Deploy.deploy(deployId);
+    console.log('Deploystore on.DEPLOY_CREATE, deploy deployItem with id ', deployId);
+    deploy.deploy(deployId);
 
     Events.trigger(Events.RERENDER, _deploys);
 });

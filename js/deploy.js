@@ -1,6 +1,8 @@
 var http = require('http');
 var qs = require('querystring');
 var spawn = require('child_process').spawn;
+var childProcess = require('child_process'), ls;
+
 
 function readFully(stream, callback) {
     var data = '';
@@ -8,7 +10,24 @@ function readFully(stream, callback) {
     stream.on('end', function () { callback (data); });
 }
 
-function deploy() {
+function deploy(deployId) {
+    console.log("deploy.deploy(deployId) is called: deployId=", deployId);
+    ls = childProcess.exec('ls -l', function (error, stdout, stderr) {
+        if (error) {
+            console.log(error.stack);
+            console.log('Error code: '+error.code);
+            console.log('Signal received: '+error.signal);
+        }
+        console.log('Child Process STDOUT: '+stdout);
+        console.log('Child Process STDERR: '+stderr);
+    });
+
+    ls.on('exit', function (code) {
+        console.log('Child process exited with exit code '+code);
+    });
+}
+
+function deploy_sofus() {
 	console.log(new Date() + ' ' + req.method + ' ' + req.url);
 	res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
 	if (req.method === 'POST') {
@@ -27,3 +46,6 @@ function deploy() {
 	}
 }
 
+module.exports = {
+    deploy: deploy
+};

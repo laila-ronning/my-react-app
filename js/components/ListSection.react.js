@@ -38,7 +38,7 @@ var ListSection = React.createClass({
     );
 
 
-  },
+  }
 
 });
 

@@ -48,10 +48,12 @@ var DeployItem = React.createClass({
 
   _onDestroyClick: function() {
     Events.trigger(Events.REMOVE_DEPLOY, this.props.deploy.id);
+    console.log("Triggered REMOVE_DEPLOY event", this.props.deploy.id);
   },
 
   _onChange: function() {
       Events.trigger(Events.DEPLOY_CREATE, this.props.deploy.id);
+      console.log("Triggered DEPLOY_CREATE event", this.props.deploy.id);
   }
 
 });
