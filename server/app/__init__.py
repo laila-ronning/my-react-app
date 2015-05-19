@@ -14,12 +14,12 @@ def get_deploys():
 
 @app.route('/node-manager/api/v1.0/deploys/<int:deploy_id>', methods = ['GET'])
 def get_deploy(deploy_id):
-    return jsonify( { 'task': deploys[0] } )
+    return jsonify( { 'deploy': deploys[deploy_id] } )
 
 @app.route('/node-manager/api/v1.0/deploy/create', methods = ['POST'])
 def create_deploy():
-    if not request.json or not 'title' in request.json:
-        abort(400)
+    if not request.json or not 'name' in request.json:
+        abort(400, 'Missing name parameter or not json')
     deploy = {
         'id': deploys[-1]['id'] + 1,
         'name': request.json['name'],
@@ -27,7 +27,7 @@ def create_deploy():
         'artifact_id': request.json['artifact_id'],
         'version': request.json['version'],
         'status': True,
-        'result': u'logg..... status finished ok'
+        'result': 'Deploy finished ok'
     }
 
     deploys.append(deploy)
