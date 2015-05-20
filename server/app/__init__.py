@@ -8,15 +8,15 @@ app = Flask(__name__, static_url_path = "")
 def index():
     return "Hello, World!"
 
-@app.route('/node-manager/api/v1.0/deploys', methods = ['GET'])
+@app.route('/node-manager/api/v1.0/deploy', methods = ['GET'])
 def get_deploys():
     return jsonify( { 'deploys': deploys } )
 
-@app.route('/node-manager/api/v1.0/deploys/<int:deploy_id>', methods = ['GET'])
+@app.route('/node-manager/api/v1.0/deploy/<int:deploy_id>', methods = ['GET'])
 def get_deploy(deploy_id):
     return jsonify( { 'deploy': deploys[deploy_id] } )
 
-@app.route('/node-manager/api/v1.0/deploy/create', methods = ['POST'])
+@app.route('/node-manager/api/v1.0/deploy', methods = ['POST'])
 def create_deploy():
     if not request.json or not 'name' in request.json:
         abort(400, 'Missing name parameter or not json')
