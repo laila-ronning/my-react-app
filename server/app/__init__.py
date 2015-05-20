@@ -1,7 +1,9 @@
 #!flask/bin/python
 from flask import Flask, jsonify, abort, request, make_response, url_for
+import shlex, subprocess
 
 app = Flask(__name__, static_url_path = "")
+
 
 @app.route('/')
 @app.route('/index')
@@ -20,18 +22,27 @@ def get_deploy(deploy_id):
 def create_deploy():
     if not request.json or not 'name' in request.json:
         abort(400, 'Missing name parameter or not json')
-    deploy = {
+
+    cmd = './run.py'
+    print cmd
+    args = shlex.split(cmd)
+    print args
+    output,error = subprocess.Popen(args,stdout = subprocess.PIPE, stderr= subprocess.PIPE).communicate()
+    print output
+    print error
+
+    new_deploy = {
         'id': deploys[-1]['id'] + 1,
         'name': request.json['name'],
         'group_id': request.json['group_id'],
         'artifact_id': request.json['artifact_id'],
         'version': request.json['version'],
-        'status': True,
-        'result': 'Deploy finished ok'
+        'status': error,
+        'result': output[0:80]
     }
 
     deploys.append(deploy)
-    return jsonify( { 'deploy': deploy } ), 201
+    return jsonify( { 'deploy': new_deploy } ), 201
 
 deploys = [
     {
@@ -44,6 +55,14 @@ deploys = [
         'result': u''
     }
 ]
+
+@app.errorhandler(500)
+def internal_error(error):
+    return "500 error"
+
+@app.errorhandler(404)
+def not_found(error):
+    return "404 error",404
 
 if __name__ == '__main__':
     app.run(debug = True)
